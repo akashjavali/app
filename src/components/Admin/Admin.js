@@ -4,7 +4,7 @@ import { BrowserRouter as Router,NavLink} from 'react-router-dom';
 
 
 const Admin = ({onInputChange, onBtn}) => {
-
+    
     return (
         <Router>
 <div>

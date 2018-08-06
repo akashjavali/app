@@ -30,8 +30,8 @@ class App extends Component {
       <Router>
       <div className="App">
 
-      <Route path='/' component={Login} exact strict />
-      <Route path='/admin' component={Admin} exact strict />
+      <Route exact path='/' component={Login}  />
+      <Route path='/admin' component={Admin}  />
       
       {/* <Login 
       onInputChange={this.onInputChange}
