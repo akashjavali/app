@@ -4,53 +4,28 @@ import "bootstrap/dist/js/bootstrap.js"
 import './App.css';
 import Login from './components/Login/Login';
 import Admin from './components/Admin/Admin';
-import { BrowserRouter as Router} from 'react-router-dom';
-import Route from 'react-router-dom/Route';
+import Home from './components/Home/Home';
+import Table from './components/Table/Table';
+import { BrowserRouter as Router,Switch,Redirect,Route} from 'react-router-dom';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      input: ''
-    
-    }
-  }
-
-  onInputChange = (event) => {
-    this.setState({input: event.target.value})
-    console.log(event.target.value);
-  }
-
-  onBtn = () => {
-    console.log('click');
-  }
-
+  
   render() {
     return (
       <Router>
-      <div className="App">
-
-      <Route exact path='/' component={Login}  />
-      <Route path='/admin' component={Admin}  />
-      
-      {/* <Login 
-      onInputChange={this.onInputChange}
-      onBtn={this.onBtn}
-      />
-      <Admin 
-      onInputChange={this.onInputChange}
-      onBtn={this.onBtn}
-      /> */}
-      
-      
-      
-      </div>
-      </Router>
+        <div>
+            <Switch>
+            <Route exact path='/' component={Home}  />
+            <Route exact path='/login' component={Login}  />
+            <Route path='/admin' component={Admin}  />
+            <Route path='/table' component={Table}  />
+            <Redirect path="/" to="/login" exact />
+            </Switch>
+            {/* <Route exact path="/login" component={Login} /> */}
+        </div>
+    </Router>
     );
   }
 }
-
-
-
 export default App;
 

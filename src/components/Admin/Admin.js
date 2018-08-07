@@ -1,21 +1,89 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './Admin.css';
-import { BrowserRouter as Router,NavLink} from 'react-router-dom';
+// import { BrowserRouter as NavLink} from 'react-router-dom';
+import ReactTable from "react-table";
+import "react-table/react-table.css";
 
 
-const Admin = ({onInputChange, onBtn}) => {
+class Admin extends Component {
     
-    return (
-        <Router>
-<div>
-    <NavLink to='/' exact><p  className='signout btn btn-link'>Sign out</p></NavLink>
-            <h1>Admin Panel</h1>
-    <div className='bt'><button className='btn btn-primary' data-toggle="modal" data-target="#myModal">Add Users</button></div>
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-            <div class="modal-content">
+    constructor() {
+        super();
+        this.state = {
+          input: '',
+          data: []
+        
+        }
+      }
+    
+      onInputChange = (event) => {
+        this.setState({input: event.target.value})
+        console.log(event.target.value);
+      }
+    
+      onBtn = () => {
+        console.log('click');
+      }
+    
 
-            <div class="add-card " >
+      addRow = () => {
+        const rows = this.state.rows;
+        rows.push('new row')
+        this.setState({rows: this.state.rows})
+    }
+
+    render() {  
+
+        const onInputChange = this.onInputChange;
+        const onBtn = this.onBtn;
+
+        
+        return (  
+
+        
+        <div className='main'>
+
+            {/* <table>
+                    {this.state.rows.map((r) => (
+                      <tr>
+                          <td>{r}</td>
+                      </tr>
+                    ))}
+                </table>
+                <button id="addBtn" onClick={this.addRow}>ADD</button> */}
+
+                <ReactTable
+            data={this.state.data}
+            columns={[
+              {
+                Header: "Name",
+                accessor: "tbName",
+                Cell: this.renderEditable
+              },
+              {
+                Header: "Email",
+                accessor: "tbEmail",
+                Cell: this.renderEditable
+              },
+              {
+                Header: "Password",
+                accessor: "tbPass",
+                Cell: this.renderEditable
+              }
+            ]}
+            className="-striped -highlight"
+          />
+
+
+
+        {/* <NavLink to='/' exact><p  className='signout btn btn-link'>Sign out</p></NavLink>
+            <h1>Admin Panel</h1>
+                <div className='bt'><button className='btn btn-primary' data-toggle="modal" data-target="#myModal">Add Users</button></div>
+                <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                <div class="modal-content">
+
+                <div class="add-card " >
                 <div class="px-4 py-3">
                         <div class="form-horizotal">
                         <div class="modal-header">
@@ -84,16 +152,10 @@ const Admin = ({onInputChange, onBtn}) => {
                 </table>
             </div>
         </div>
-
-
+        </div> */}
         </div>
-
-
-
-
-        </div>
-        </Router>
-    )
+        );
+    }
 }
-
+ 
 export default Admin;
