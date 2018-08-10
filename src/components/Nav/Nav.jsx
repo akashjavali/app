@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
 class Nav extends Component {
     state = {  }
@@ -8,10 +9,10 @@ class Nav extends Component {
             <div>
             <ul class="nav justify-content-end m-2">
                 <li class="nav-item ">
-                    <a class="nav-link active" style={{color:'black'}} href="">Home</a>
+                   <Link to='/'> <a class="nav-link active" style={{color:'black'}} href="">Home</a></Link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style={{color:'black'}} href="">Login</a>
+                   <Link to='/Login'> <a class="nav-link" style={{color:'black'}} href="">Login</a></Link>
                 </li>
             </ul>
             </div>

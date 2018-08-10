@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './Admin.css';
-// import { BrowserRouter as NavLink} from 'react-router-dom';
-import ReactTable from "react-table";
+import {Link} from 'react-router-dom';
 import "react-table/react-table.css";
 
 
@@ -10,27 +9,68 @@ class Admin extends Component {
     constructor() {
         super();
         this.state = {
-          input: '',
-          data: []
+            id: 0,
+            nameInput: '',
+            emailInput: '',
+            passwordInput: '',
+            data: [],
+            list: []
         
         }
       }
+
+      
+      hydrateStateWithLocalStorage() {
+        // for all items in state
+        for (let key in this.state) {
+          // if the key exists in localStorage
+          if (localStorage.hasOwnProperty(key)) {
+            // get the key's value from localStorage
+            let value = localStorage.getItem(key);
     
-      onInputChange = (event) => {
-        this.setState({input: event.target.value})
-        console.log(event.target.value);
+            // parse the localStorage string and setState
+            try {
+              value = JSON.parse(value);
+              this.setState({ [key]: value });
+            } catch (e) {
+              // handle empty string
+              this.setState({ [key]: value });
+            }
+          }
+        }
+      }
+
+      componentDidMount() {
+        this.hydrateStateWithLocalStorage();
+     }
+
+    
+
+      onInputChange = (input, e) => {
+        if(input === 'name') {
+            this.setState({nameInput: e.target.value})
+        }else if(input === 'email') {
+            this.setState({emailInput: e.target.value})
+        }else if(input === 'password') {
+            this.setState({passwordInput: e.target.value})
+        }
+        console.log(input, e.target.value); 
       }
     
       onBtn = () => {
-        console.log('click');
-      }
+          
+        const data = this.state.data;
+        data.push({
+            name: this.state.nameInput,
+            email: this.state.emailInput,
+            password: this.state.passwordInput
+        })
+        this.setState({data: data})
+        console.log(this.state.data)
+        localStorage.setItem('data', JSON.stringify(data))
     
-
-      addRow = () => {
-        const rows = this.state.rows;
-        rows.push('new row')
-        this.setState({rows: this.state.rows})
     }
+
 
     render() {  
 
@@ -43,41 +83,9 @@ class Admin extends Component {
         
         <div className='main'>
 
-            {/* <table>
-                    {this.state.rows.map((r) => (
-                      <tr>
-                          <td>{r}</td>
-                      </tr>
-                    ))}
-                </table>
-                <button id="addBtn" onClick={this.addRow}>ADD</button> */}
-
-                <ReactTable
-            data={this.state.data}
-            columns={[
-              {
-                Header: "Name",
-                accessor: "tbName",
-                Cell: this.renderEditable
-              },
-              {
-                Header: "Email",
-                accessor: "tbEmail",
-                Cell: this.renderEditable
-              },
-              {
-                Header: "Password",
-                accessor: "tbPass",
-                Cell: this.renderEditable
-              }
-            ]}
-            className="-striped -highlight"
-          />
-
-
-
-        {/* <NavLink to='/' exact><p  className='signout btn btn-link'>Sign out</p></NavLink>
-            <h1>Admin Panel</h1>
+           
+                <Link to="/"><p className= 'signout'>Sign out</p></Link>
+                <h1>Admin Panel</h1>
                 <div className='bt'><button className='btn btn-primary' data-toggle="modal" data-target="#myModal">Add Users</button></div>
                 <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
@@ -85,32 +93,31 @@ class Admin extends Component {
 
                 <div class="add-card " >
                 <div class="px-4 py-3">
-                        <div class="form-horizotal">
-                        <div class="modal-header">
-                        <h4 class="modal-title">Add User</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        
-                        </div>
-                        
-                        <div class="modal-body">
-                        <label >Name</label>
-                            <input onChange={onInputChange} type="text" class="form-control" id="focusedInput" placeholder="Name"/>
-                            <label >Email</label>
-                            <input onChange={onInputChange} type="Email" class="form-control" id="focusedInput" placeholder="Email"/>
-                            <label >Password</label>
-                            <input onChange={onInputChange} type="text" class="form-control" id="focusedInput" placeholder="Password"/>
-                        </div>
-                            
-                        </div>
+                <div class="form-horizotal">
+                <div class="modal-header">
+                <h4 class="modal-title">Add User</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                
+                </div>
+                
+                <div class="modal-body">
+                <label >Name</label>
+                    <input onChange={(e) => onInputChange('name', e)} type="text" class="form-control" id="focusedInput" placeholder="Name"/>
+                    <label >Email</label>
+                    <input onChange={(e) => onInputChange('email', e)} type="Email" class="form-control" id="focusedInput" placeholder="Email"/>
+                    <label >Password</label>
+                    <input onChange={(e) => onInputChange('password', e)} type="text" class="form-control" id="focusedInput" placeholder="Password"/>
+                </div>
+                    
+                </div>
 
-                        <div class="modal-footer">
-                        <button onClick={onBtn} type="submit" class="btn btn-primary">Submit</button>
-                         </div>
+                <div class="modal-footer">
+                <button onClick={() => onBtn()} type="submit" class="btn btn-primary">Submit</button>
+                    </div>
                             
                  </div>  
             </div>
-            
-            
+
         </div>
         </div>
         </div>
@@ -130,29 +137,25 @@ class Admin extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <th scope="row">1</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    </tr>
-                    <tr>
-                    <th scope="row">2</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    </tr>
-                    <tr>
-                    <th scope="row">3</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    </tr>
+                      {
+                          
+                        
+                          this.state.data.map((data, key) => (
+                          <tr>
+                              <td>{key + 1}</td>
+                              <td>{data.name}</td>
+                              <td>{data.email}</td>
+                              <td>{data.password}</td>           
+                          </tr>
+                      ))
+                      }
+
+                    
                 </tbody>
                 </table>
             </div>
         </div>
-        </div> */}
+        </div>
         </div>
         );
     }

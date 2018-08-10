@@ -8,9 +8,6 @@ addRow = () => {
 
     render() {  
 
-        const onInputChange = this.onInputChange;
-        const onBtn = this.onBtn;
-
         
         return (  
 
@@ -26,3 +23,28 @@ addRow = () => {
                 </table>
                 <button id="addBtn" onClick={this.addRow}>ADD</button>
 
+
+
+React-table
+
+ <ReactTable
+            data={this.state.data}
+            columns={[
+              {
+                Header: "Name",
+                accessor: "tbName",
+                Cell: this.renderEditable
+              },
+              {
+                Header: "Email",
+                accessor: "tbEmail",
+                Cell: this.renderEditable
+              },
+              {
+                Header: "Password",
+                accessor: "tbPass",
+                Cell: this.renderEditable
+              }
+            ]}
+            className="-striped -highlight"
+          />
