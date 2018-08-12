@@ -87,32 +87,32 @@ class Admin extends Component {
                 <Link to="/"><p className= 'signout'>Sign out</p></Link>
                 <h1>Admin Panel</h1>
                 <div className='bt'><button className='btn btn-primary' data-toggle="modal" data-target="#myModal">Add Users</button></div>
-                <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog">
-                <div class="modal-content">
+                <div className="modal fade" id="myModal" role="dialog">
+                <div className="modal-dialog">
+                <div className="modal-content">
 
-                <div class="add-card " >
-                <div class="px-4 py-3">
-                <div class="form-horizotal">
-                <div class="modal-header">
-                <h4 class="modal-title">Add User</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div className="add-card " >
+                <div className="px-4 py-3">
+                <div className="form-horizotal">
+                <div className="modal-header">
+                <h4 className="modal-title">Add User</h4>
+                <button type="button" className="close" data-dismiss="modal">&times;</button>
                 
                 </div>
                 
-                <div class="modal-body">
+                <div className="modal-body">
                 <label >Name</label>
-                    <input onChange={(e) => onInputChange('name', e)} type="text" class="form-control" id="focusedInput" placeholder="Name"/>
+                    <input onChange={(e) => onInputChange('name', e)} type="text" className="form-control" id="focusedInput" placeholder="Name"/>
                     <label >Email</label>
-                    <input onChange={(e) => onInputChange('email', e)} type="Email" class="form-control" id="focusedInput" placeholder="Email"/>
+                    <input onChange={(e) => onInputChange('email', e)} type="Email" className="form-control" id="focusedInput" placeholder="Email"/>
                     <label >Password</label>
-                    <input onChange={(e) => onInputChange('password', e)} type="text" class="form-control" id="focusedInput" placeholder="Password"/>
+                    <input onChange={(e) => onInputChange('password', e)} type="text" className="form-control" id="focusedInput" placeholder="Password"/>
                 </div>
                     
                 </div>
 
-                <div class="modal-footer">
-                <button onClick={() => onBtn()} type="submit" class="btn btn-primary">Submit</button>
+                <div className="modal-footer">
+                <button onClick={() => onBtn()} type="submit" className="btn btn-primary">Submit</button>
                     </div>
                             
                  </div>  
@@ -126,8 +126,8 @@ class Admin extends Component {
         <div className='admin-table'>
 
             <div className='tb'>
-            <div class="admin-card" >
-            <table class="table table-bordered text-center">
+            <div className="admin-card" >
+            <table className="table table-bordered text-center">
                 <thead>
                     <tr>
                     <th scope="col">ID</th>

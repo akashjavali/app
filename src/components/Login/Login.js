@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './Login.css'
 import Nav from '../Nav/Nav'
-import {Link} from 'react-router-dom'; 
+// import {Link} from 'react-router-dom'; 
+
 
 const database = [
         {
@@ -51,7 +52,7 @@ class Login extends Component {
 
     onSignIn = (email, password) => {
         if (this.userValid(email, password)) {
-                return <Link to ='/admin'></Link>
+                return this.props.history.push('/admin');
              } else {
                  alert('Sorry, Wrong Email or Password')
              }
@@ -91,3 +92,12 @@ class Login extends Component {
 }
  
 export default Login;
+
+
+
+
+
+
+
+
+

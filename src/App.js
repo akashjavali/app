@@ -6,7 +6,9 @@ import Login from './components/Login/Login';
 import Admin from './components/Admin/Admin';
 import Home from './components/Home/Home';
 import Table from './components/Table/Table.jsx';
+// import { PrivateRoute } from './PrivateRoute';
 import { BrowserRouter as Router,Switch,Redirect,Route} from 'react-router-dom';
+
 
 class App extends Component {
   
